@@ -9,15 +9,9 @@ const setUpAndStartServer = async () => {
     app.use(express.urlencoded({ extended: true }));
 
     app.listen(PORT, async () => {
-        const data = {
-            name: "lolopolo"
-        };
-
-        try {
-            const city = await cityRepository.createCity(data);
-        } catch (error) {
-            console.log( error);
-        }
+        console.log(`Server is running on port ${PORT}`);
+        const repo = new cityRepository()
+        await repo.deleteCity(1)
     });
 };
 
