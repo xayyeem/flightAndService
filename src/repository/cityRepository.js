@@ -1,4 +1,4 @@
-const { City } = require('../models/index'); // Import the City model
+const { City } = require('../models/index');
 
 class CityRepository {
     async createCity({ name }) {
@@ -37,15 +37,17 @@ class CityRepository {
     }
 
     async getCity(cityId) {
-        try {
-            const city = await City.findByPk(cityId)
-            // const city = await City.findone(cityId)
-            return city;
-        } catch (error) {
-            console.log("Error in gettomg:", error.message);
-            throw error;
+        // const city = await City.find(cityId);
+        // Alternative approach:
+        const city = await City.findByPk(cityId);
+        if (!city) {
+            throw new Error(`City with ID ${cityId} not found`);
         }
+
+        return city;
+
     }
+
 }
 
 module.exports = CityRepository; 
