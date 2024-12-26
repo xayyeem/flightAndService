@@ -31,7 +31,8 @@ class CityRepository {
             })
             return city;
         } catch (error) {
-
+            console.log("Error in updating:", error.message);
+            throw error;
         }
     }
 
@@ -41,7 +42,8 @@ class CityRepository {
             // const city = await City.findone(cityId)
             return city;
         } catch (error) {
-
+            console.log("Error in gettomg:", error.message);
+            throw error;
         }
     }
 }
