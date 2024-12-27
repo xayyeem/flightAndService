@@ -66,12 +66,34 @@ const get = async (req, res) => {
     }
 }
 
-const update = async (req, res) => {
+const getAllCities = async (req, res) => {
     try {
-        const response = await cityService.getCity(req.params.id, req.body)
+        const response = await cityService.getAll(req.query); // Pass req.query directly
         return res.status(200).json({
             data: response,
-            message: 'City fetched successfully',
+            message: 'Cities fetched successfully',
+            success: true,
+            error: {},
+        });
+    } catch (error) {
+        console.log('Error in controller while fetching all cities:', error.message);
+        return res.status(500).json({
+            data: [],
+            message: 'Failed to fetch cities',
+            success: false,
+            error: error.message,
+        });
+    }
+};
+
+
+
+const update = async (req, res) => {
+    try {
+        const response = await cityService.updatedCity(req.params.id, req.body)
+        return res.status(200).json({
+            data: response,
+            message: 'updated  fetched successfully',
             success: true,
             error: {},
         })
@@ -85,4 +107,5 @@ module.exports = {
     destroy,
     get,
     update,
+    getAllCities
 }

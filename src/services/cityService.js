@@ -25,9 +25,11 @@ class CityService {
 
     }
 
-    async updateCity(cityId, data) {
+    async updatedCity(cityId, data) {
         try {
-            const city = await this.cityrepository.updateCity(cityId, data)
+            // const city = await this.cityrepository.updateCity(cityId, data)
+            const city = await this.cityRepository.updateCity(cityId, data)
+
             return city
         } catch (error) {
             console.log('something went wrong at service layer')
@@ -44,6 +46,16 @@ class CityService {
             throw { error }
         }
     }
+    async getAll(filter) {
+        try {
+            const cities = await this.cityRepository.getAllCities({ name: filter.name });
+            return cities;
+        } catch (error) {
+            console.log('Error in service layer while fetching all cities:', error.message);
+            throw new Error('Service Error: Unable to fetch cities');
+        }
+    }
+
 }
 
 module.exports = CityService
